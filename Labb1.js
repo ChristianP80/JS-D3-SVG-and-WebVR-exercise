@@ -82,46 +82,24 @@ addEventListener('load', function() {
       .attr('height', height + 150)
       .attr('width', width);
 
-      svg.selectAll('rect')
-   .data(listOfCategories)
-   .enter()
-   .append('rect')
-   .attr('x', function (value, index) { return xScale(index); })
-   .attr('y', function (value) { return yScale(value); })
-   .attr('width', function () { return width / listOfCategories.length - 10; })
-   .attr('height', function (value) { return height - yScale(value) - 30; })
-   .attr('fill', 'steelblue')
+    svg.selectAll('rect')
+      .data(listOfCategories)
+      .enter()
+      .append('rect')
+      .attr('x', function (value, index) { return xScale(index); })
+      .attr('y', function (value) { return yScale(value); })
+      .attr('width', function () { return width / listOfCategories.length - 10; })
+      .attr('height', function (value) { return height - yScale(value) - 30; })
+      .attr('fill', 'steelblue')
 
-    .on("mouseover", function(value, index){tooltip.text("There are " + value + " reports in " + indexList[index])
-    d3.event.target.style.fill = "hotpink";
-    return tooltip.style("visibility", "visible");})
-    .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
-    .on("mouseout", function(){
-      d3.event.target.style.fill = "steelblue";
-      return tooltip.style("visibility", "hidden")
+      .on("mouseover", function(value, index){tooltip.text("There are " + value + " reports in " + indexList[index])
+      d3.event.target.style.fill = "hotpink";
+      return tooltip.style("visibility", "visible");})
+      .on("mousemove", function(){return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");})
+      .on("mouseout", function(){
+        d3.event.target.style.fill = "steelblue";
+        return tooltip.style("visibility", "hidden")
     ;});
-
-    // svg.selectAll('rect')
-    //   .data(listOfCategories)
-    //   .enter()
-    //   .append('rect')
-    //   .attr('x', function(value, index) {
-    //     return xScale(index);
-    //   })
-    //   .attr('y', function(value) {
-    //     return yScale(value);
-    //   })
-    //   .attr('width', function() {
-    //     return width / listOfCategories.length - 10;
-    //   })
-    //   .attr('height', function(value) {
-    //     return height - yScale(value) - 30;
-    //   })
-    //   .attr('fill', 'steelblue')
-
-    //   .on("mouseover", function(){return tooltip.style("visibility", "visible");})
-    //   .on("mousemove", function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-    //   .on("mouseout", function(){return tooltip.style("visibility", "hidden");});
 
     svg.append('g')
       .attr('transform', 'translate(25, 0)')
@@ -138,7 +116,7 @@ addEventListener('load', function() {
     }  
 
   function create3dDiadram() {
-    var spaceing = -50;
+    var spaceing = -90;
 
     Object.keys(categories).forEach(function(key) {
       var box = document.createElement('a-box');
@@ -146,7 +124,7 @@ addEventListener('load', function() {
       box.setAttribute('width', '2');
       box.setAttribute('depth', '2');
       box.setAttribute('color', 'steelblue');
-      box.setAttribute('position', spaceing + ' ' + categories[key] / 2 + ' ' + '-100');
+      box.setAttribute('position', spaceing + ' '  + (-20 + categories[key] / 2) + ' ' + '-100');
       scene.appendChild(box);
       spaceing += 3;
     });
